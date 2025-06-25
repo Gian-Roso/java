@@ -17,11 +17,13 @@ public class ComentarioRepositoryIMPL implements ComentarioRepository {
     @Transactional
     @Override
     public void cadastrarComentario(Comentario comentario) {
-        String query = "INSET INTO comentario(assunto, descricao) VALUES(:assunto, :descricao)";
+        String query = "INSERT INTO comentario(assunto, descricao, usuario_id, produto_id) VALUES(:assunto, :descricao, :usuario_id, :produto_id)";
 
         entityManager.createNativeQuery(query)
                 .setParameter("assunto", comentario.getAssunto())
                 .setParameter("descricao", comentario.getDescricao())
+                .setParameter("usuario_id", comentario.getUsuario().getId())
+                .setParameter("produto_id", comentario.getProduto().getId())
                 .executeUpdate();
     }
 
@@ -35,7 +37,7 @@ public class ComentarioRepositoryIMPL implements ComentarioRepository {
 
     @Override
     public Comentario getId(Long id) {
-        String query = "SELECT * FROM comentario WHERE id = id";
+        String query = "SELECT * FROM comentario WHERE id = :id";
 
         return (Comentario) entityManager.createNativeQuery(query, Comentario.class)
                 .setParameter("id", id)
@@ -44,11 +46,13 @@ public class ComentarioRepositoryIMPL implements ComentarioRepository {
     @Transactional
     @Override
     public void atualizarComentario(Comentario comentario, Long id) {
-        String query = "UPDATE comentario(assunto, descricao) VALUES(:assunto, :descricao)";
+        String query = "UPDATE comentario SET(assunto, descricao, usuario_id, produto_id) = (:assunto, :descricao, :usuario_id, :produto_id) WHERE id = :id";
 
         entityManager.createNativeQuery(query)
                 .setParameter("assunto", comentario.getAssunto())
                 .setParameter("descricao", comentario.getDescricao())
+                .setParameter("usuario_id", comentario.getUsuario().getId())
+                .setParameter("produto_id", comentario.getProduto().getId())
                 .setParameter("id", id)
                 .executeUpdate();
     }

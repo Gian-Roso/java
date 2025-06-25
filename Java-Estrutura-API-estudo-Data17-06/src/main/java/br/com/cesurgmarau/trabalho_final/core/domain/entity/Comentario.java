@@ -9,7 +9,9 @@ import lombok.Setter;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Entity(name = "comentario")
 public class Comentario {
-    @Id @Column(name = "id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     @Column(name = "assunto")
     private String assunto;

@@ -1,0 +1,21 @@
+meta {
+  name: criar_comentario
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/comentario
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "assunto": "preto",
+    "descricao": "trabaia poco",
+    "usuario_id":7,
+    "produto_id":5
+  }
+  
+}
