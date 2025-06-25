@@ -1,0 +1,20 @@
+meta {
+  name: atualiza_comentario
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8080/comentario/2
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "assunto": "lorenzao",
+    "descricao": "trabaia mucho",
+    "usuario_id":7,
+    "produto_id":5
+  }
+}
